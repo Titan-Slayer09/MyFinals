@@ -43,11 +43,12 @@ class room:
 
 Grand_Hall = room("Grand Hall", "Around you is a beautiful marble-based manor, with only a few cobwebs, you are reminded to hire some cleaning staff, looking up you see a portrait of your grandmother, Margret, and every other family head before her. Your grand hall is a grand room, and you must be sure it is well kept for your guests.")
 
-U_Main_hall = room("Upstairs Main Hall", "You are in the upstairs hallway, this connects to many rooms, including your bedroom, the office, a restroom, and ")
-
+U_Main_Hall = room("Upstairs Main Hall", "You are in the upstairs hallway, this connects to many rooms, including your bedroom, the office, a restroom, and ")
+Up_Main_hall_Name = str(U_Main_Hall.name)
+Up_Main_hall_Desc = str(U_Main_Hall.description)
 Kitchen = room("Kitchen", "You enter the tile-floored kitchen and remeber visiting your family with your father and mother, ")
 
-
+diningRoom = room("Dining Room", "This room, is covered in a long beautiful carpet with a table long as the room, a chair at the head of the table lies empty, your grandma's old seat")
 
 #slowprint function
 def sp(s):
@@ -81,7 +82,7 @@ def start():
     
     
     global HeShe
-    global himHer
+    global him
     #define gender
     chosen = False
     while chosen == False:
@@ -108,55 +109,61 @@ def start():
     sp(f"Unknown: Thank you, enjoy the game!")
 
 #the start of the game
-def main():
+def exploration():
     sp("You have entered your new home")
     sp("Since your grandmother Margret's passing, you have inherited the family manor")
     sp(f"Since the disappearances of the entire rest of your family, you {name} are the sole survivor.")
     sp("In front of you is the grand hall, a beautiful golden laced blue carpet lays out around you ")
     sp("You hear a whisper, 'Welcome,' however you are alone.")
     chosen = False
-    while chosen == False:
-        
-        sp("What do you want to do, 1. look around, 2. go upstairs, 3. enter the kithcen 4. Enter the dining room")
-        choice = input("")
-        kitchen1_or_dine2 = 0
-        #look around
-        if choice == "1":
-            chosen = False
-            sp("You are in the " + Grand_Hall.name + " " + Grand_Hall.description)
-        #upstairs
-        elif choice == "2":
-            chosen = True
-            up_or_no = True
-            sp("You walk upstairs...")
-            #continue
-        #secret option
-        elif choice == "Margret":
-            chosen = False
-            #make this lead to something if some other criteria is met
-            sp("Your grandma was not a terrible person, she had a nack for getting good buisness deals... it seems like she always had a way of knowing who the higher ups are...")
-        
-        #kitchen
-        elif choice == "3":
-            sp()
-            up_or_no = False
-            kitchen1_or_dine2 = 1
-        #dining room
-        elif choice == "4":
-            sp()
-            up_or_no = False
-            kitchen1_or_dine2 = 2
-        #idk
-        else:
-            chosen = False
-            sp("not sure what you meant by that...")
+    #
+    def Grand_Hall_room():
+        chosen = False
+        while chosen == False:
+            sp("What do you want to do, 1. look around, 2. go upstairs, 3. enter the kithcen 4. Enter the dining room")                
+            choice = input("")
+            global kitchen1_or_dine2
+            kitchen1_or_dine2 = 0
+            global up_or_no
+            up_or_no = "placeholder"
+            #look around
+            if choice == "1":
+                chosen = False
+                sp("You are in the " + Grand_Hall.name + " " + Grand_Hall.description)
+                #upstairs
+            elif choice == "2":
+                chosen = True
+                up_or_no = True
+                sp("You walk upstairs...")
+                #continue
+                #secret option
+            elif choice == "Margret":
+                chosen = False
+                #make this lead to something if some other criteria is met
+                sp("Your grandma was not a terrible person, she had a nack for getting good buisness deals... it seems like she always had a way of knowing who the higher ups are...")
+                
+            #kitchen
+            elif choice == "3":
+                up_or_no = False
+                kitchen1_or_dine2 = 1
+                chosen = True
+            #dining room
+            elif choice == "4":
+                up_or_no = False
+                kitchen1_or_dine2 = 2
+                chosen = True
+            #idk
+            else:
+                chosen = False
+                sp("not sure what you meant by that...")
+    Grand_Hall_room()
     #upstairs, Dining Room, or Kitchen
     if up_or_no == True:
-        sp()
+        sp(f"You are in " + {Up_Main_hall_Name} + ", " + {Up_Main_hall_Desc})
     elif kitchen1_or_dine2 == 1:
-        sp()
+        sp(f"You are in " + {Kitchen.name} + ", " + {Kitchen.description})
     elif kitchen1_or_dine2 == 2:
-        sp()
+        sp(f"You are in " + {diningRoom.name} + ", " + {diningRoom.description})
     else:
         sp()
 
@@ -165,4 +172,4 @@ def main():
 #loading()
 start()
 #loading2()
-main()
+exploration()
